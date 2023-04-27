@@ -26,7 +26,7 @@ jobs:
             rng_name="$(echo "$odd_name"| sed -E 's#\.[^.]*$##g')";
             ls -la $GITHUB_WORKSPACE
             ls -la $GITHUB_WORKSPACE/tei
-            $GITHUB_WORKSPACE/tei/Stylesheets/bin/teitorelaxng "${odd_name}" "../rng/tmp.rng";
+            $GITHUB_WORKSPACE/tei/bin/teitorelaxng "${odd_name}" "../rng/tmp.rng";
           done;
           IFS="$OIFS"
           git config --global user.name 'ODD Bot'
