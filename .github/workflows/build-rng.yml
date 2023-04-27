@@ -21,6 +21,9 @@ jobs:
           path: ./tei
       - name: Update RelaxNG Schemata
         run: |
+          curl -X GET "https://github.com/Saxonica/Saxon-HE/raw/main/12/Java/SaxonHE12-1J.zip"
+          unzip *.zip
+          ls -la
           cd main/odd
           which java
           OIFS="$IFS"
