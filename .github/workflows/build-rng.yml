@@ -52,7 +52,7 @@ jobs:
           git add ../rng/*.rng ../documentation/*.html
           git diff-index --quiet HEAD || (git commit -am "Workflow: Generate RelaxNG schemata and documentation" && git push)
   deploy:
-    if: ${{ always() }}
+    needs: update-odd
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
