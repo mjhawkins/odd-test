@@ -24,7 +24,7 @@ jobs:
           IFS=$'\n'
           for odd_name in *.xml *.odd; do
             rng_name="$(echo "$odd_name"| sed -E 's#\.[^.]*$##g')";
-            ls -la ../TEI/Stylesheets/bin/teitorelaxng;
+            ls -la ../
             ../TEI/Stylesheets/bin/teitorelaxng "${odd_name}" "../rng/tmp.rng";
           done;
           IFS="$OIFS"
