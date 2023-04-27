@@ -22,7 +22,7 @@ jobs:
       - name: Update RelaxNG Schemata
         run: |
           wget "https://github.com/Saxonica/Saxon-HE/raw/main/12/Java/SaxonHE12-1J.zip"
-          ls -la
+          unzip *.zip
           cd main/odd
           which java
           OIFS="$IFS"
