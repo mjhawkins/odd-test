@@ -23,7 +23,7 @@ jobs:
           IFS=$'\n'
           for odd_name in *.xml *.odd; do
             rng_name="$(echo "$odd_name"| sed -E 's#\.[^.]*$##g')";
-            ls $GITHUB_WORKSPACE/TEI
+            ls -la $GITHUB_WORKSPACE/TEI/bin
             $GITHUB_WORKSPACE/TEI/Stylesheets/bin/teitorelaxng "${odd_name}" "tmp.rng";
             mv tmp.rng "../rng/${rng_name}.rng"
           done;
