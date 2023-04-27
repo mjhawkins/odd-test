@@ -33,6 +33,7 @@ jobs:
           for odd_name in *.odd; do
             rng_name="$(echo "$odd_name"| sed -E 's#\.[^.]*$##g')";
             $GITHUB_WORKSPACE/tei/bin/teitorelaxng "${odd_name}" "../rng/${rng_name}.rng";
+            ls -la $GITHUB_WORKSPACE/tei/odds/
             java -DentityExpansionLimit=9000000 -jar $GITHUB_WORKSPACE/saxon-he-12.1.jar -xi:on -o:$GITHUB_WORKSPACE/full.odd "${odd_name}" $GITHUB_WORKSPACE/tei/odds/odd2odd.xsl
             java -DentityExpansionLimit=9000000 -jar $GITHUB_WORKSPACE/saxon-he-12.1.jar -xi:on -o:../documentation/${rng_name}.html "$GITHUB_WORKSPACE/full.odd" $GITHUB_WORKSPACE/tei/odds/odd2html.xsl
           done;
