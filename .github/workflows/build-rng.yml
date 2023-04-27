@@ -1,4 +1,4 @@
-name: update-hours-and-concat-spacefinder-data
+name: build-rng
 on:
   push:
     branches:
@@ -22,7 +22,7 @@ jobs:
           OIFS="$IFS"
           IFS=$'\n'
           for odd_name in *.xml *.odd; do
-            rng_name="$(echo "$odd_name"| gsed -E 's#\.[^.]*$##g')";
+            rng_name="$(echo "$odd_name"| sed -E 's#\.[^.]*$##g')";
             $GITHUB_WORKSPACE/TEI/Stylesheets/bin/teitorelaxng "${odd_name}" "tmp.rng";
             mv tmp.rng "../rng/${rng_name}.rng"
           done;
