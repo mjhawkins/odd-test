@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - main
+      
   workflow_dispatch:
 jobs:
   update-odd:
@@ -17,7 +18,7 @@ jobs:
         with:
           repository: TEIC/Stylesheets
           path: ./tei
-      - name: Update RelaxNG Schemata
+      - name: Update Schemata and Docs
         run: |
           wget "https://github.com/Saxonica/Saxon-HE/raw/main/12/Java/SaxonHE12-1J.zip"
           unzip *.zip
