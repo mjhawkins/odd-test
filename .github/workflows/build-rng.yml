@@ -1,0 +1,33 @@
+name: update-hours-and-concat-spacefinder-data
+on:
+  push:
+    branches:
+      - main
+jobs:
+  update-odd:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          path: main
+      - name: Checkout TEI Stylesheets
+        uses: actions/checkout@v3
+        with:
+          repository: TEIC/Stylesheets
+          path: ./TEI
+      - name: Update RelaxNG Schemata
+        run: |
+          cd main/odd
+          OIFS="$IFS"
+          IFS=$'\n'
+          for odd_name in *.xml *.odd; do
+            rng_name="$(echo "$odd_name"| gsed -E 's#\.[^.]*$##g')";
+            $GITHUB_WORKSPACE/TEI/Stylesheets/bin/teitorelaxng "${odd_name}" "tmp.rng";
+            mv tmp.rng "../rng/${rng_name}.rng"
+          done;
+          IFS="$OIFS"
+          git config --global user.name 'ODD Bot'
+          git config --global user.email '<>'
+          git add $GITHUB_WORKSPACE/rng/*.rng
+          git diff-index --quiet HEAD || (git commit -am "Workflow: Generate RelaxNG Schemata" && git push)
