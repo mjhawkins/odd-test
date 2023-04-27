@@ -24,12 +24,11 @@ jobs:
           IFS=$'\n'
           for odd_name in *.xml *.odd; do
             rng_name="$(echo "$odd_name"| sed -E 's#\.[^.]*$##g')";
-            ls -la $GITHUB_WORKSPACE/TEI/bin
-            echo "$GITHUB_WORKSPACE/TEI/Stylesheets/bin/teitorelaxng ${odd_name} tmp.rng;"
-            $GITHUB_WORKSPACE/TEI/Stylesheets/bin/teitorelaxng "${odd_name}" "../rng/tmp.rng";
+            ls -la ../TEI/Stylesheets/bin/teitorelaxng;
+            ../TEI/Stylesheets/bin/teitorelaxng "${odd_name}" "../rng/tmp.rng";
           done;
           IFS="$OIFS"
           git config --global user.name 'ODD Bot'
           git config --global user.email '<>'
-          git add $GITHUB_WORKSPACE/rng/*.rng
+          git add ../rng/*.rng
           git diff-index --quiet HEAD || (git commit -am "Workflow: Generate RelaxNG Schemata" && git push)
