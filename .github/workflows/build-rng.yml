@@ -51,7 +51,8 @@ jobs:
           git config --global user.email '<>'
           git add ../rng/*.rng ../documentation/*.html
           git diff-index --quiet HEAD || (git commit -am "Workflow: Generate RelaxNG schemata and documentation" && git push)
-    deploy:
+  deploy:
+    if: ${{ always() }}
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
