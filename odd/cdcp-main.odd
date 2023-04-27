@@ -22,7 +22,7 @@
     </teiHeader>
     <text>
         <body>
-            <head>Cambridge Digital Collections Platform (Main ODD2)</head>
+            <head>Cambridge Digital Collections Platform (Main ODD)</head>
             <schemaSpec ident="cdcp_main" start="TEI teiCorpus" prefix="tei_" targetLang="en" docLang="en" defaultExceptions="http://www.tei-c.org/ns/1.0 http://www.w3.org/1998/Math/MathML teix:egXML">
                 <moduleRef url="https://www.tei-c.org/release/xml/tei/Exemplars/mathml2-main.rng"/>
                 <moduleRef n="01" key="tei"/>
