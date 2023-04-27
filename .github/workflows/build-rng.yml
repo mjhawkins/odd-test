@@ -22,6 +22,7 @@ jobs:
       - name: Update RelaxNG Schemata
         run: |
           curl -X GET "https://github.com/Saxonica/Saxon-HE/raw/main/12/Java/SaxonHE12-1J.zip"
+          ls -la
           unzip *.zip
           ls -la
           cd main/odd
