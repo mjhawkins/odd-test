@@ -24,6 +24,7 @@ jobs:
           for odd_name in *.xml *.odd; do
             rng_name="$(echo "$odd_name"| sed -E 's#\.[^.]*$##g')";
             ls -la $GITHUB_WORKSPACE/TEI/bin
+            echo "$GITHUB_WORKSPACE/TEI/Stylesheets/bin/teitorelaxng ${odd_name} tmp.rng;"
             $GITHUB_WORKSPACE/TEI/Stylesheets/bin/teitorelaxng "${odd_name}" "tmp.rng";
             mv tmp.rng "../rng/${rng_name}.rng"
           done;
