@@ -3,8 +3,6 @@ on:
   push:
     branches:
       - main
-    paths:
-      - odd/**
   workflow_dispatch:
 jobs:
   update-odd:
