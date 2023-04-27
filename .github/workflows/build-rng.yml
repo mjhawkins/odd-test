@@ -25,6 +25,7 @@ jobs:
           ls -la
           unzip *.zip
           ls -la
+          java -DentityExpansionLimit=9000000 -jar $GITHUB_WORKSPACE/saxon-he-12.1.jar main/odd
           cd main/odd
           which java
           OIFS="$IFS"
@@ -32,9 +33,11 @@ jobs:
           for odd_name in *.odd; do
             rng_name="$(echo "$odd_name"| sed -E 's#\.[^.]*$##g')";
             $GITHUB_WORKSPACE/tei/bin/teitorelaxng "${odd_name}" "../rng/${rng_name}.rng";
+            java -DentityExpansionLimit=9000000 -jar $GITHUB_WORKSPACE/saxon-he-12.1.jar -xi:on -o:$GITHUB_WORKSPACE/full.odd "${odd_name}" $GITHUB_WORKSPACE/tei/odds/odd2odd.xsl
+            java -DentityExpansionLimit=9000000 -jar $GITHUB_WORKSPACE/saxon-he-12.1.jar -xi:on -o:../documentation/${rng_name}.html "$GITHUB_WORKSPACE/full.odd" $GITHUB_WORKSPACE/tei/odds/odd2html.xsl
           done;
           IFS="$OIFS"
           git config --global user.name 'ODD Bot'
           git config --global user.email '<>'
-          git add ../rng/*.rng
-          git diff-index --quiet HEAD || (git commit -am "Workflow: Generate RelaxNG Schemata" && git push)
+          git add ../rng/*.rng ../documentation/*.html
+          git diff-index --quiet HEAD || (git commit -am "Workflow: Generate RelaxNG schemata and documentation" && git push)
