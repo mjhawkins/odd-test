@@ -5,6 +5,7 @@ on:
       - main
     paths:
       - odd/**
+  workflow_dispatch:
 jobs:
   update-odd:
     runs-on: ubuntu-latest
@@ -21,7 +22,7 @@ jobs:
       - name: Update RelaxNG Schemata
         run: |
           cd main/odd
-          ls -la
+          which java
           OIFS="$IFS"
           IFS=$'\n'
           for odd_name in *.odd; do
